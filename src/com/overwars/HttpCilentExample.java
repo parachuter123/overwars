@@ -49,8 +49,8 @@ public class HttpCilentExample {
  
 	System.out.println("Done");
   }
- 
-  private void sendPost(String url, List<NameValuePair> postParams) 
+  
+  public void sendPost(String url, List<NameValuePair> postParams) 
         throws Exception {
  
 	HttpPost post = new HttpPost(url);
@@ -89,7 +89,7 @@ public class HttpCilentExample {
  
   }
  
-  private String GetPageContent(String url) throws Exception {
+  public String GetPageContent(String url) throws Exception {
  
 	HttpGet request = new HttpGet(url);
  

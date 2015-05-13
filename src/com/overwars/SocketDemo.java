@@ -1,10 +1,12 @@
 package com.overwars;
 
 import java.io.PrintStream;
+import java.net.InetAddress;
 import java.net.InetSocketAddress;
 import java.net.Proxy;
 import java.net.URL;
 import java.net.URLConnection;
+import java.net.UnknownHostException;
 import java.util.Scanner;
 
 
@@ -40,6 +42,11 @@ public class SocketDemo {
 		}
 	}
 	public static void main(String[] args) {
-		new SocketDemo().init();
+		try {
+			InetAddress add = InetAddress.getLocalHost();
+			System.out.println(add.getHostName() + "," + add.getHostAddress());
+		} catch (UnknownHostException e) {
+			e.printStackTrace();
+		}
 	}
 }
