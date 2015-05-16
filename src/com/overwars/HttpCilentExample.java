@@ -1,6 +1,7 @@
 package com.overwars;
 
 import java.io.BufferedReader;
+import java.io.IOException;
 import java.io.InputStreamReader;
 import java.io.UnsupportedEncodingException;
 import java.net.CookieHandler;
@@ -10,6 +11,7 @@ import java.util.List;
 
 import org.apache.http.HttpResponse;
 import org.apache.http.NameValuePair;
+import org.apache.http.client.ClientProtocolException;
 import org.apache.http.client.HttpClient;
 import org.apache.http.client.entity.UrlEncodedFormEntity;
 import org.apache.http.client.methods.HttpGet;
@@ -50,6 +52,22 @@ public class HttpCilentExample {
 	System.out.println("Done");
   }
   
+  public StringBuffer sentGet(String url) throws ClientProtocolException, IOException{
+	  HttpGet get = new HttpGet(url);
+	  HttpResponse response = client.execute(get);
+	  int responseCode = response.getStatusLine().getStatusCode();
+	  
+	  BufferedReader rd = new BufferedReader(
+              new InputStreamReader(response.getEntity().getContent()));
+	  
+	  StringBuffer result = new StringBuffer();
+	  String line = "";
+	  while ((line = rd.readLine()) != null) {
+		  result.append(line);
+	  }
+	  return result;
+  }
+  
   public void sendPost(String url, List<NameValuePair> postParams) 
         throws Exception {
  
@@ -58,8 +76,7 @@ public class HttpCilentExample {
 	// add header
 	post.setHeader("Host", "accounts.google.com");
 	post.setHeader("User-Agent", USER_AGENT);
-	post.setHeader("Accept", 
-             "text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8");
+	post.setHeader("Accept","text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8");
 	post.setHeader("Accept-Language", "en-US,en;q=0.5");
 	post.setHeader("Cookie", getCookies());
 	post.setHeader("Connection", "keep-alive");
@@ -89,7 +106,7 @@ public class HttpCilentExample {
  
   }
  
-  public String GetPageContent(String url) throws Exception {
+  public  String GetPageContent(String url) throws Exception {
  
 	HttpGet request = new HttpGet(url);
  
