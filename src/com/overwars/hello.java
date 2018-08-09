@@ -14,7 +14,6 @@ public class hello{
 
 //diff
 //add a util line
-//add a line by ronan 20170802
-//add a line by master 20170802 use remote branch develop_branch
-//add a line by test 20170807
+//add a line online
+//add one line at local
 
